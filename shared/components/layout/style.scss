@@ -1,0 +1,46 @@
+$barHeight: 80px;
+
+.fixed {
+  position: fixed;
+  width: 100%;
+  height: $barHeight;
+}
+
+.container {
+  min-height: 100%;
+
+  .header {
+    @extend .fixed;
+
+    border-bottom: 1px solid black;
+    top: 0;
+
+    span {
+      display: inline-block;
+      height: $barHeight;
+      line-height: $barHeight;
+      padding-left: 80px;
+      color: grey;
+    }
+  }
+  
+  .content {
+    padding: $barHeight 0;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+  
+  .footer {
+    @extend .fixed;
+  
+    bottom: 0;
+    border-top: 1px solid black;
+    color: grey;
+    text-align: center;
+
+    p {
+      margin: 10px;
+    }
+  }
+}
+

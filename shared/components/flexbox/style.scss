@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  min-height: 100%;
+}
+
+.js_center {
+  justify-content: center;
+}
+
+.fd_row {
+  flex-direction: row;
+}
+
+.fd_column {
+  flex-direction: column;
+}
+
+// TODO more class need to be defined here
