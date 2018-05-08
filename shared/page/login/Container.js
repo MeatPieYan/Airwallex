@@ -1,10 +1,10 @@
 import React from 'react';
 import * as style from './style.scss';
 
-import { Button, Flexbox } from '../../components';
+import { Button, Flexbox, Modal } from '../../components';
 
 
-const Login = () => (
+const Login = () => [(
   <Flexbox justifyContent='center' flexDirection='column' clazz={style.flexbox}>
     <p className={style.title}>A better way</p>
     <p className={style.title}>to enjoy every day.</p>
@@ -13,6 +13,10 @@ const Login = () => (
       <Button text='Request an invite' className={style.button} />
     </div>
   </Flexbox>
-);
+), (
+  <Modal visible={true} title='title' width='300px' okTxt='send' >
+    12123
+  </Modal>
+)];
 
 export default Login;
