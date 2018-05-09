@@ -4,11 +4,12 @@ import { reactAutoBind } from 'funsee-utils';
 
 import * as style from './style.scss';
 import { Button, Flexbox, Form, Input, Modal } from '../../components';
-import { showRequestModal, hiddenRequestModal, inputChange, sendReq } from './action';
+import { showRequestModal, hiddenRequestModal, inputChange, sendReq, hiddenSuccessModal } from './action';
 
 @connect(
   state => ({
     showRequestModalFlag: state.module.login.showRequestModalFlag,
+    showSuccessModalFlag: state.module.login.showSuccessModalFlag,
     form: state.module.login.form,
     errorMsg: state.common.errorMsg,
     loading: state.common.loading
@@ -17,7 +18,8 @@ import { showRequestModal, hiddenRequestModal, inputChange, sendReq } from './ac
     showRequestModal,
     hiddenRequestModal,
     inputChange,
-    sendReq
+    sendReq,
+    hiddenSuccessModal
   }
 )
 @reactAutoBind()
@@ -28,6 +30,10 @@ export default class Login extends Comp {
 
   hiddenRequest() {
     this.props.hiddenRequestModal();
+  }
+
+  hiddenSuccess() {
+    this.props.hiddenSuccessModal();
   }
 
   inputChange(key, value, hasError) {
@@ -46,6 +52,7 @@ export default class Login extends Comp {
   render() {
     const {
       showRequestModalFlag,
+      showSuccessModalFlag,
       form,
       errorMsg,
       loading
@@ -80,6 +87,17 @@ export default class Login extends Comp {
 
         <div>{errorMsg}</div>
       </Modal>
+      ), (
+        <Modal
+          visible={showSuccessModalFlag}
+          title='All done!'
+          width='350px'
+          okTxt='ok'
+          onBtnClick={this.hiddenSuccess}
+          onMaskClick={this.hiddenSuccess}
+        >
+          <div sytle='text-align: center;'>Successful~</div>
+        </Modal>
       )];
   }
 }

@@ -1,7 +1,8 @@
-import { INPUT_CHANGE, TOGGLE_REQUEST_MODAL } from './action';
+import { INPUT_CHANGE, TOGGLE_REQUEST_MODAL, TOGGLE_SUCCESS_MODAL } from './action';
 
 const initialState = {
   showRequestModalFlag: false,
+  showSuccessModalFlag: false,
   form: {
     value: {},
     validate: {}
@@ -14,6 +15,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         showRequestModalFlag: action.payload
+      };
+    case TOGGLE_SUCCESS_MODAL:
+      return {
+        ...state,
+        showSuccessModalFlag: action.payload
       };
 
     case INPUT_CHANGE:
