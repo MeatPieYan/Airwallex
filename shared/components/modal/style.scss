@@ -6,8 +6,13 @@
   border: 1px solid #333;
   background-color: white;
   padding: 16px;
+  z-index: 20;
 }
 
 .hidden {
   display: none;
+}
+
+.toolbar {
+  margin: 32px 0;
 }

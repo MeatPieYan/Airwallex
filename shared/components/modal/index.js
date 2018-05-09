@@ -4,14 +4,17 @@ import classNames from 'classnames';
 
 import * as style from './style.scss';
 import Button from '../button';
+import Mask from '../mask';
 import Title from '../title';
+import Splitter from '../splitter';
 
 const Modal = ({
   children,
   visible,
   title,
   okTxt,
-  onOk,
+  onBtnClick,
+  onMaskClick,
   width
 }) => {
   const clazz = classNames({
@@ -19,20 +22,29 @@ const Modal = ({
     [style.hidden]: !visible
   });
 
-  return (
+  return [(
+    <Mask visible={visible} onCLick={onMaskClick} />
+  ), (
     <div className={clazz} style={width ? { width } : { width: '60%' }}>
-      { title ? (<Title text={title} />) : ''}
+      { title ? (<div className={style.toolbar}><Title text={title} /><Splitter /></div>) : ''}
       { children }
-      <Button text={okTxt} onClick={onOk} />
+      <div className={style.toolbar}>
+        <Button text={okTxt} onClick={onBtnClick} />
+      </div>
     </div>
-  );
+    )];
 };
 
 Modal.defaultProps = {
   visible: false,
   title: '',
   okTxt: '',
-  onOk: () => {},
+  onBtnClick: () => {
+    console.log('click button');
+  },
+  onMaskClick: () => {
+    console.log('click mask in modal');
+  },
   width: ''
 };
 
@@ -41,7 +53,7 @@ Modal.propTypes = {
   visible: bool,
   title: string,
   okTxt: string,
-  onOk: func,
+  onBtnClick: func,
   width: string
 };
 

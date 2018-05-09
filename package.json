@@ -26,6 +26,7 @@
     "classnames": "^2.2.5",
     "funsee": "^1.5.17",
     "funsee-hammer": "^1.4.11",
+    "funsee-utils": "^1.0.0",
     "moment": "^2.21.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
@@ -33,6 +34,6 @@
   },
   "devDependencies": {
     "eslint": "^4.18.1",
-    "eslint-config-funsee": "0.0.2"
+    "eslint-config-funsee": "0.0.3"
   }
 }

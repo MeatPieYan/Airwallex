@@ -1,7 +1,7 @@
 import React from 'react';
 import * as style from './style.scss';
 
-import { Button, Flexbox, Modal } from '../../components';
+import { Button, Flexbox, Input, Modal } from '../../components';
 
 
 const Login = () => [(
@@ -14,9 +14,11 @@ const Login = () => [(
     </div>
   </Flexbox>
 ), (
-  <Modal visible={true} title='title' width='300px' okTxt='send' >
-    12123
+  <Modal visible={true} title='Request on invite' width='300px' okTxt='send' >
+    <Input placeholder='Full name' />
+    <Input placeholder='Email' />
+    <Input placeholder='Confirm email' />
   </Modal>
-)];
+  )];
 
 export default Login;
