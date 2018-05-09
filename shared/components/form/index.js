@@ -4,9 +4,18 @@ import { reactAutoBind } from 'funsee-utils';
 
 @reactAutoBind()
 class Form extends React.Component {
+  componentWillMount() {
+    React.Children.forEach(this.props.children, (child) => {
+      if (!child.props.name) {
+        throw Error('Please define props[name] for each input');
+      }
+      this.props.onChange(child.props.name, '', true);
+    });
+  }
+
   onValueChange(name) {
-    return (value) => {
-      this.props.onChange(name, value);
+    return (value, hasError) => {
+      this.props.onChange(name, value, hasError);
     };
   }
 

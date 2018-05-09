@@ -23,5 +23,8 @@
 module.exports = {
   log: {
     silly: 'console'
+  },
+  service: {
+    default: 'https://l94wc2001h.execute-api.ap-southeast-2.amazonaws.com'
   }
 };

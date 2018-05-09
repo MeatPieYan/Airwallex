@@ -15,7 +15,9 @@ const Modal = ({
   okTxt,
   onBtnClick,
   onMaskClick,
-  width
+  width,
+  loading, 
+  loadingTxt
 }) => {
   const clazz = classNames({
     [style.container]: true,
@@ -29,7 +31,9 @@ const Modal = ({
       { title ? (<div className={style.toolbar}><Title text={title} /><Splitter /></div>) : ''}
       { children }
       <div className={style.toolbar}>
-        <Button text={okTxt} onClick={onBtnClick} />
+        {
+          loading ? (<div className={style.disable}>{loadingTxt}</div>) : (<Button text={okTxt} onClick={onBtnClick} />)
+        }
       </div>
     </div>
     )];
@@ -45,7 +49,9 @@ Modal.defaultProps = {
   onMaskClick: () => {
     console.log('click mask in modal');
   },
-  width: ''
+  width: '',
+  loading: false,
+  loadingTxt: ''
 };
 
 Modal.propTypes = {
@@ -54,7 +60,9 @@ Modal.propTypes = {
   title: string,
   okTxt: string,
   onBtnClick: func,
-  width: string
+  width: string,
+  loading: bool,
+  loadingTxt: string
 };
 
 export default Modal;

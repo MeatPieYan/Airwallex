@@ -1,6 +1,7 @@
-import createRequestTypes from '../utils/actionCreator';
+export const SET_ERROR_MSG = Symbol('SET_ERROR_MSG');
+export const SHOW_LOADING = Symbol('SHOW_LOADING');
 
-export const LOAD_ENV = createRequestTypes('LOAD_ENV');
-
-export const loadEnv = () => ({ type: LOAD_ENV.REQUEST });
-export const loadEnvSuccess = env => ({ type: LOAD_ENV.SUCCESS, payload: { env } });
+export const setErrorMsg = msg => ({ type: SET_ERROR_MSG, payload: msg });
+export const resetErrorMsg = () => ({ type: SET_ERROR_MSG, payload: '' });
+export const showLoading = () => ({ type: SHOW_LOADING, payload: true });
+export const hideLoading = () => ({ type: SHOW_LOADING, payload: false });

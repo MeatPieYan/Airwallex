@@ -4,17 +4,20 @@ import { reactAutoBind } from 'funsee-utils';
 
 import * as style from './style.scss';
 import { Button, Flexbox, Form, Input, Modal } from '../../components';
-import { showRequestModal, hiddenRequestModal, inputChange } from './action';
+import { showRequestModal, hiddenRequestModal, inputChange, sendReq } from './action';
 
 @connect(
   state => ({
     showRequestModalFlag: state.module.login.showRequestModalFlag,
-    form: state.module.login.form
+    form: state.module.login.form,
+    errorMsg: state.common.errorMsg,
+    loading: state.common.loading
   }),
   {
     showRequestModal,
     hiddenRequestModal,
-    inputChange
+    inputChange,
+    sendReq
   }
 )
 @reactAutoBind()
@@ -27,12 +30,26 @@ export default class Login extends Comp {
     this.props.hiddenRequestModal();
   }
 
-  inputChange(key, value) {
-    this.props.inputChange(key, value);
+  inputChange(key, value, hasError) {
+    this.props.inputChange(key, value, hasError);
+  }
+
+  submit() {
+    const validation = this.props.form.validate;
+    const keys = Object.keys(validation);
+    const hasError = keys.some(key => validation[key]);
+    if (!hasError) {
+      this.props.sendReq(this.props.form.value)
+    }
   }
 
   render() {
-    const { showRequestModalFlag, form } = this.props;
+    const {
+      showRequestModalFlag,
+      form,
+      errorMsg,
+      loading
+    } = this.props;
 
     return [(
       <Flexbox justifyContent='center' flexDirection='column' clazz={style.flexbox} key='flexbox'>
@@ -50,14 +67,18 @@ export default class Login extends Comp {
         title='Request on invite'
         width='300px'
         okTxt='send'
-        // onBtnClick={this.showRequest}
+        onBtnClick={this.submit}
         onMaskClick={this.hiddenRequest}
+        loading={loading}
+        loadingTxt='sending, please wait...'
       >
-        <Form value={form} onChange={this.inputChange} >
+        <Form value={form.value} onChange={this.inputChange}>
           <Input placeholder='Full name' rules={value => value.length >= 4} name='name' />
           <Input placeholder='Email' rules={/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/} name='email' />
-          <Input placeholder='Confirm email' name='confirmEmail' />
+          <Input placeholder='Confirm email' rules={value => value === form.value.email} name='confirmEmail' />
         </Form>
+
+        <div>{errorMsg}</div>
       </Modal>
       )];
   }

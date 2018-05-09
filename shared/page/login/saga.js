@@ -1,18 +1,25 @@
-// import { takeLatest, takeEvery } from 'redux-saga';
+import { takeLatest } from 'redux-saga';
 import { call, put, all } from 'redux-saga/effects';
-// import { ADD_TODO2 } from './action';
+import { SEND_REQ } from './action';
+import { setErrorMsg, resetErrorMsg, showLoading, hideLoading } from '../../common/action';
 
-function* test(action) {
+import commonService from '../../common/service';
+
+function* sendReq(action) {
   try {
-    console.log('test saga', action);
-    yield 1;
+    yield put(resetErrorMsg());
+    yield put(showLoading());
+    const data = yield call(commonService, '/api/login/sendReq', action.payload);
+
+    yield put(hideLoading());
   } catch (error) {
-    console.log(error);
+    yield put(setErrorMsg(error));
+    yield put(hideLoading());
   }
 }
 
 export default function* () {
   yield all([
-    // takeLatest(ADD_TODO2, test)
+    takeLatest(SEND_REQ, sendReq)
   ]);
 }

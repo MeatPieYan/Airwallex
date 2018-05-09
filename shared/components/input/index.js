@@ -22,25 +22,29 @@ class Input extends Comp {
     });
   }
 
-  handleBlur(e) {
-    this.checkInput(e);
-  }
+  // handleBlur(e) {
+  //   this.checkInput(e);
+  // }
 
   checkRegExp(e) {
     const reg = new RegExp(this.props.rules);
     if (!reg.test(e.target.value)) {
       this.setState({ hasError: true });
+      this.props.onChange(e.target.value, true);
       return;
     }
     this.setState({ hasError: false });
+    this.props.onChange(e.target.value, false);
   }
 
   checkFunction(e, fn) {
     if (fn(e.target.value)) {
       this.setState({ hasError: false });
+      this.props.onChange(e.target.value, false);
       return;
     }
     this.setState({ hasError: true });
+    this.props.onChange(e.target.value, true);
   }
 
   checkInput(e) {
@@ -53,7 +57,7 @@ class Input extends Comp {
   }
 
   handleChange(e) {
-    this.props.onChange(e.target.value);
+    // this.props.onChange(e.target.value);
 
     this.checkInput(e);
   }
@@ -72,7 +76,6 @@ class Input extends Comp {
         onChange={this.handleChange}
         placeholder={placeholder}
         className={clazz}
-        onBlur={this.handleBlur}
       />
     );
   }

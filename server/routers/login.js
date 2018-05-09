@@ -12,7 +12,7 @@
  * @author   zhaoxing<jiyiwohanxing@gmail.com>
  */
 const testRouter = router => ([
-  router.post('/wf'),
+  router.post('/sendReq', 'loginCtrl.getData')
 ]);
 
 module.exports = testRouter;

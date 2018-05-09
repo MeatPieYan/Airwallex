@@ -1,25 +1,27 @@
+const getData = async (ctx) => {
+  console.log('body', ctx.request.body);
 
+  // const data = await ctx.ajax.post('/prod/fake-auth', ctx.request.body);
 
-const test1 = async (ctx, next) => {
-  // ctx.body = { value: '你真棒！' };
-  // ctx.status = 200;
-  // await next();
-  // ctx.body = 123;
-  // const startTime = Date.now();
-  // console.log(ctx.request)
-  // await next();
-  // console.log(ctx.body)
-  // console.log(Date.now() - startTime);
+  // if (data.errorMessage) {
+  //   ctx.body = {
+  //     success: false,
+  //     msg: data.errorMessage,
+  //     data: null
+  //   };
+  //   ctx.status = 200;
 
+  //   return;
+  // }
 
-  
+  // ctx.body = {
+  //   success: false,
+  //   msg: '',
+  //   data
+  // };
+  ctx.status = 200;
 };
 
-const getData = async (ctx) => {
-  const authInfoList = await getAuthInfoService();
-  ctx.body = authInfoList;
-}
-
 module.exports = {
-  test1
+  getData
 };

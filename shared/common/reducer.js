@@ -1,12 +1,17 @@
-import { LOAD_ENV } from './action';
+import { SET_ERROR_MSG, SHOW_LOADING } from './action';
 
-export default function (state = {}, action) {
+export default function (state = { errorMsg: '', loading: false }, action) {
   switch (action.type) {
-    case LOAD_ENV.SUCCESS:
+    case SET_ERROR_MSG:
       return {
         ...state,
-        env: action.payload.env
+        errorMsg: action.payload
       };
+    case SHOW_LOADING:
+      return {
+        ...state, 
+        loading: action.payload
+      }
     default:
       return state;
   }

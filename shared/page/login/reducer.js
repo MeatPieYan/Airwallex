@@ -2,7 +2,10 @@ import { INPUT_CHANGE, TOGGLE_REQUEST_MODAL } from './action';
 
 const initialState = {
   showRequestModalFlag: false,
-  form: {}
+  form: {
+    value: {},
+    validate: {}
+  }
 };
 
 export default function (state = initialState, action) {
@@ -17,8 +20,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         form: {
-          ...state.form,
-          [action.payload.key]: action.payload.value
+          value: {
+            ...state.form.value,
+            [action.payload.key]: action.payload.value
+          },
+          validate: {
+            ...state.form.validate,
+            [action.payload.key]: action.payload.hasError
+          }
         }
       }
     default:
