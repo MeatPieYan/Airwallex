@@ -28,7 +28,7 @@ export default class Login extends Comp {
   }
 
   inputChange(key, value) {
-    this.props.inputChange(key, value)
+    this.props.inputChange(key, value);
   }
 
   render() {
@@ -54,8 +54,8 @@ export default class Login extends Comp {
         onMaskClick={this.hiddenRequest}
       >
         <Form value={form} onChange={this.inputChange} >
-          <Input placeholder='Full name' rules='' name='name' />
-          <Input placeholder='Email' rules='' name='email' />
+          <Input placeholder='Full name' rules={value => value.length >= 4} name='name' />
+          <Input placeholder='Email' rules={/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/} name='email' />
           <Input placeholder='Confirm email' name='confirmEmail' />
         </Form>
       </Modal>
