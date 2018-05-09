@@ -35,7 +35,7 @@ export default function (state = initialState, action) {
             [action.payload.key]: action.payload.hasError
           }
         }
-      }
+      };
     default:
       return state;
   }

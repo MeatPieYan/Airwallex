@@ -45,7 +45,7 @@ export default class Login extends Comp {
     const keys = Object.keys(validation);
     const hasError = keys.some(key => validation[key]);
     if (!hasError) {
-      this.props.sendReq(this.props.form.value)
+      this.props.sendReq(this.props.form.value);
     }
   }
 

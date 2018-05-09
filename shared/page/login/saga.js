@@ -10,7 +10,7 @@ function* sendReq(action) {
     yield put(resetErrorMsg());
     yield put(showLoading());
     const data = yield call(commonService, '/api/login/sendReq', action.payload);
-    // console.log(data)
+    console.log(data);
     yield put(hiddenRequestModal());
     yield put(showSuccessModal());
     yield put(hideLoading());

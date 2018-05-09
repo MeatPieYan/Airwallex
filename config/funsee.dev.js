@@ -21,6 +21,10 @@
  */
 
 module.exports = {
+  customMiddleware: [{
+    name: 'rootMid',
+    sort: '2100'
+  }],
   log: {
     silly: 'console'
   },
