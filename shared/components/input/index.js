@@ -1,5 +1,5 @@
 import React, { Component as Comp } from 'react';
-import { string, oneOf, func } from 'prop-types';
+import { string, oneOf, func, any } from 'prop-types';
 import { reactAutoBind } from 'funsee-utils';
 
 import * as style from './style.scss';
@@ -21,7 +21,10 @@ class Input extends Comp {
   }
 
   handleChange(e) {
-    this.props.onChange(e.target.value);
+    const reg = new RegExp(this.props.rules);
+    if (reg.test(e.target.value)) {
+      this.props.onChange(e.target.value);
+    }
   }
 
   render() {
@@ -33,6 +36,7 @@ class Input extends Comp {
 }
 
 Input.defaultProps = {
+  rules: '',
   value: '',
   type: 'text',
   placeholder: '',
@@ -42,6 +46,7 @@ Input.defaultProps = {
 };
 
 Input.propTypes = {
+  rules: any,
   value: string,
   type: oneOf(['text', 'password']),
   onChange: func,

@@ -4,11 +4,11 @@ import className from 'classnames';
 
 import * as style from './style.scss';
 
-const Button = ({ text, onClick, custClass }) => { 
-  const clazz = className(style.btn, custClass)
+const Button = ({ text, onClick, custClass }) => {
+  const clazz = className(style.btn, custClass);
   return (
     <button onClick={onClick} className={clazz}>{text}</button>
-  )
+  );
 };
 
 Button.defaultProps = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { element, oneOf, arrayOf, bool, string, func } from 'prop-types';
+import { bool, string, func, node } from 'prop-types';
 import classNames from 'classnames';
 
 import * as style from './style.scss';
@@ -23,9 +23,9 @@ const Modal = ({
   });
 
   return [(
-    <Mask visible={visible} onCLick={onMaskClick} />
+    <Mask visible={visible} onClick={onMaskClick} key='requestMask' />
   ), (
-    <div className={clazz} style={width ? { width } : { width: '60%' }}>
+    <div className={clazz} style={width ? { width } : { width: '60%' }} key='requestModal'>
       { title ? (<div className={style.toolbar}><Title text={title} /><Splitter /></div>) : ''}
       { children }
       <div className={style.toolbar}>
@@ -49,7 +49,7 @@ Modal.defaultProps = {
 };
 
 Modal.propTypes = {
-  children: oneOf(element, arrayOf(element)).isRequired,
+  children: node.isRequired,
   visible: bool,
   title: string,
   okTxt: string,

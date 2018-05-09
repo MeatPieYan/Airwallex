@@ -1,24 +1,64 @@
-import React from 'react';
+import React, { Component as Comp } from 'react';
+import connect from 'funsee/connect';
+import { reactAutoBind } from 'funsee-utils';
+
 import * as style from './style.scss';
+import { Button, Flexbox, Form, Input, Modal } from '../../components';
+import { showRequestModal, hiddenRequestModal, inputChange } from './action';
 
-import { Button, Flexbox, Input, Modal } from '../../components';
+@connect(
+  state => ({
+    showRequestModalFlag: state.module.login.showRequestModalFlag,
+    form: state.module.login.form
+  }),
+  {
+    showRequestModal,
+    hiddenRequestModal,
+    inputChange
+  }
+)
+@reactAutoBind()
+export default class Login extends Comp {
+  showRequest() {
+    this.props.showRequestModal();
+  }
 
+  hiddenRequest() {
+    this.props.hiddenRequestModal();
+  }
 
-const Login = () => [(
-  <Flexbox justifyContent='center' flexDirection='column' clazz={style.flexbox}>
-    <p className={style.title}>A better way</p>
-    <p className={style.title}>to enjoy every day.</p>
-    <p className={style.subTitle}>Be the first to know when we launch.</p>
-    <div className={style.btn}>
-      <Button text='Request an invite' className={style.button} />
-    </div>
-  </Flexbox>
-), (
-  <Modal visible={true} title='Request on invite' width='300px' okTxt='send' >
-    <Input placeholder='Full name' />
-    <Input placeholder='Email' />
-    <Input placeholder='Confirm email' />
-  </Modal>
-  )];
+  inputChange(key, value) {
+    this.props.inputChange(key, value)
+  }
 
-export default Login;
+  render() {
+    const { showRequestModalFlag, form } = this.props;
+
+    return [(
+      <Flexbox justifyContent='center' flexDirection='column' clazz={style.flexbox} key='flexbox'>
+        <p className={style.title}>A better way</p>
+        <p className={style.title}>to enjoy every day.</p>
+        <p className={style.subTitle}>Be the first to know when we launch.</p>
+        <div className={style.btn}>
+          <Button text='Request an invite' className={style.button} onClick={this.showRequest} />
+        </div>
+      </Flexbox>
+    ), (
+      <Modal
+        key='requestModal'
+        visible={showRequestModalFlag}
+        title='Request on invite'
+        width='300px'
+        okTxt='send'
+        // onBtnClick={this.showRequest}
+        onMaskClick={this.hiddenRequest}
+      >
+        <Form value={form} onChange={this.inputChange} >
+          <Input placeholder='Full name' rules='' name='name' />
+          <Input placeholder='Email' rules='' name='email' />
+          <Input placeholder='Confirm email' name='confirmEmail' />
+        </Form>
+      </Modal>
+      )];
+  }
+}

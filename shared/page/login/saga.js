@@ -1,6 +1,6 @@
-import { takeLatest, takeEvery } from 'redux-saga';
+// import { takeLatest, takeEvery } from 'redux-saga';
 import { call, put, all } from 'redux-saga/effects';
-import { ADD_TODO2 } from './action';
+// import { ADD_TODO2 } from './action';
 
 function* test(action) {
   try {
@@ -13,6 +13,6 @@ function* test(action) {
 
 export default function* () {
   yield all([
-    takeLatest(ADD_TODO2, test)
+    // takeLatest(ADD_TODO2, test)
   ]);
 }

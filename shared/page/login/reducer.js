@@ -1,12 +1,26 @@
-import { ADD_TODO2 } from './action';
+import { INPUT_CHANGE, TOGGLE_REQUEST_MODAL } from './action';
 
-export default function (state = { text: 'test text2' }, action) {
+const initialState = {
+  showRequestModalFlag: false,
+  form: {}
+};
+
+export default function (state = initialState, action) {
   switch (action.type) {
-    case ADD_TODO2:
+    case TOGGLE_REQUEST_MODAL:
       return {
-        // ...state,
-        text: action.payload
+        ...state,
+        showRequestModalFlag: action.payload
       };
+
+    case INPUT_CHANGE:
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          [action.payload.key]: action.payload.value
+        }
+      }
     default:
       return state;
   }

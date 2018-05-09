@@ -1,5 +1,5 @@
 import React from 'react';
-import { element, string, arrayOf } from 'prop-types';
+import { node, string, arrayOf } from 'prop-types';
 import classNames from 'classnames';
 
 import * as style from './style.scss';
@@ -11,7 +11,7 @@ const defaultProps = {
 };
 
 const propTypes = {
-  children: arrayOf(element).isRequired,
+  children: node.isRequired,
   justifyContent: string,
   flexDirection: string,
   clazz: string
